@@ -10,18 +10,21 @@ from function.UnimportantFunction import *
 from threading import  Thread
 from time import sleep
 
-VERSION = "[client]0.1.1"
-BASEURL = "http://localhost:25600"
+VERSION = "[client]0.1.2"
+BASEURL = "http://server.eft.joza.fun"
 
 class AppUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_EFTPQ_UI()
         self.ui.setupUi(self)
+        self.ui.pushButton_search.setEnabled(False)
         self.ui.label_tool_version_x.setText(VERSION)
         self.ui.comboBox_server_url.setCurrentText(BASEURL)
-        self.getServerVersion()
-        self.upgradeInfo()
+
+        thread_getNewVersion = Thread(target=self.getNewVersion,args=())
+        thread_getNewVersion.start()
+
         # 点击按钮跳转
         self.ui.pushButton_github_logo.clicked.connect(toGithub)
         self.ui.pushButton_bilibili_logo.clicked.connect(toBilibili)
@@ -32,25 +35,49 @@ class AppUI(QMainWindow):
     def getNotice(self):
         pass
 
+    # 启动更新线程
+    def getNewVersion(self):
+        self.getServerVersion()
+        self.upgradeInfo()
+
     # 获取服务端版本号
     def getServerVersion(self):
         url = self.ui.comboBox_server_url.currentText()
         url = url + "/getServerVersion"
-        res = get(url=url)
-        if(res.status_code==200):
-            jsondata = json.loads(res.text)
-            self.ui.label_server_version_x.setText(jsondata['ServerVersion'])
+        try:
+            res = get(url=url)
+            if (res.status_code == 200):
+                jsondata = json.loads(res.text)
+                # 启用搜索按钮
+                self.ui.pushButton_search.setEnabled(True)
+                self.ui.label_server_version_x.setText(jsondata['ServerVersion'])
+            else:
+                self.ui.pushButton_search.setEnabled(False)
+                self.ui.label_server_version_x.setText(" ! 获取版本失败(code:"+ res.status_code +")")
+        except:
+            self.ui.pushButton_search.setEnabled(False)
+            self.ui.label_server_version_x.setText(" ! 无法连接服务器")
+
+
+
+
 
     # 获取更新信息
     def upgradeInfo(self):
         url = self.ui.comboBox_server_url.currentText()
         url = url + "/upgradeInfo"
-        res = get(url=url)
-        if(res.status_code==200):
-            jsondata = json.loads(res.text)
-            v = self.ui.label_tool_version_x.text()
-            if(v != jsondata['clientVersion']):
-                self.ui.label_tool_version_x.setText(v + " <有更新>" + jsondata['clientVersion'])
+        try:
+            res = get(url=url)
+            if (res.status_code == 200):
+                self.ui.pushButton_search.setEnabled(True)
+                jsondata = json.loads(res.text)
+                if (VERSION != jsondata['clientVersion']):
+                    self.ui.label_tool_version_x.setText(VERSION + " <有更新>" + jsondata['clientVersion'])
+            else:
+                self.ui.label_tool_version_x.setText(VERSION + " ! 获取更新失败(code:"+ res.status_code +")")
+        except:
+            self.ui.label_tool_version_x.setText(VERSION + " ! 无法连接服务器")
+
 
     # 新线程入口函数
     def threadFunc(self):
