@@ -39,7 +39,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../sourse/eft_logo.ico</normaloff>../sourse/eft_logo.ico</iconset>
+    <normaloff>../resource/eft_logo.ico</normaloff>../resource/eft_logo.ico</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -457,7 +457,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../sourse/github_logo.svg</normaloff>../sourse/github_logo.svg</iconset>
+     <normaloff>../resource/github_logo.svg</normaloff>../resource/github_logo.svg</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -486,7 +486,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../sourse/bilibili_logo.svg</normaloff>../sourse/bilibili_logo.svg</iconset>
+     <normaloff>../resource/bilibili_logo.svg</normaloff>../resource/bilibili_logo.svg</iconset>
    </property>
    <property name="iconSize">
     <size>

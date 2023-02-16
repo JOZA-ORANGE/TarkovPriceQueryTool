@@ -1,3 +1,4 @@
+import os
 import sys
 
 from requests import get
@@ -10,8 +11,8 @@ from function.UnimportantFunction import *
 from threading import  Thread
 from time import sleep
 
-VERSION = "[client]0.1.2"
-BASEURL = "http://server.eft.joza.fun"
+VERSION = "[client]0.1.3"
+BASEURL = ""
 
 class AppUI(QMainWindow):
     def __init__(self):
@@ -177,6 +178,18 @@ class AppUI(QMainWindow):
 
 
 if __name__ == "__main__":
+    # 资源文件目录访问
+    def sourse_path(relative_path):
+        if getattr(sys, 'frozen', False):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.abspath(".")
+        return os.path.join(base_path, relative_path)
+
+    # 修改当前工作目录
+    cd = sourse_path('')
+    os.chdir(cd)
+
     app = QApplication([])
 
     window = AppUI()
