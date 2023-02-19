@@ -17,9 +17,9 @@ class Ui_EFTPQ_UI(object):
     def setupUi(self, EFTPQ_UI):
         if not EFTPQ_UI.objectName():
             EFTPQ_UI.setObjectName(u"EFTPQ_UI")
-        EFTPQ_UI.resize(790, 800)
-        EFTPQ_UI.setMinimumSize(QSize(790, 800))
-        EFTPQ_UI.setMaximumSize(QSize(790, 800))
+        EFTPQ_UI.resize(850, 793)
+        EFTPQ_UI.setMinimumSize(QSize(850, 793))
+        EFTPQ_UI.setMaximumSize(QSize(850, 793))
         EFTPQ_UI.setBaseSize(QSize(790, 800))
         EFTPQ_UI.setMouseTracking(False)
         EFTPQ_UI.setTabletTracking(False)
@@ -35,7 +35,7 @@ class Ui_EFTPQ_UI(object):
         self.label_server_url.setAlignment(Qt.AlignCenter)
         self.comboBox_server_url = QComboBox(EFTPQ_UI)
         self.comboBox_server_url.setObjectName(u"comboBox_server_url")
-        self.comboBox_server_url.setGeometry(QRect(70, 10, 560, 30))
+        self.comboBox_server_url.setGeometry(QRect(70, 10, 421, 30))
         self.comboBox_server_url.setEditable(True)
         self.comboBox_server_url.setFrame(True)
         self.label_search = QLabel(EFTPQ_UI)
@@ -48,8 +48,8 @@ class Ui_EFTPQ_UI(object):
         self.lineEdit_search.setObjectName(u"lineEdit_search")
         self.lineEdit_search.setGeometry(QRect(70, 50, 420, 30))
         self.tableWidget_item_list = QTableWidget(EFTPQ_UI)
-        if (self.tableWidget_item_list.columnCount() < 7):
-            self.tableWidget_item_list.setColumnCount(7)
+        if (self.tableWidget_item_list.columnCount() < 8):
+            self.tableWidget_item_list.setColumnCount(8)
         font = QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -71,7 +71,7 @@ class Ui_EFTPQ_UI(object):
         self.tableWidget_item_list.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         __qtablewidgetitem3 = QTableWidgetItem()
         __qtablewidgetitem3.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem3.setFont(font1);
+        __qtablewidgetitem3.setFont(font);
         self.tableWidget_item_list.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         __qtablewidgetitem4.setTextAlignment(Qt.AlignCenter);
@@ -85,11 +85,20 @@ class Ui_EFTPQ_UI(object):
         __qtablewidgetitem6.setTextAlignment(Qt.AlignCenter);
         __qtablewidgetitem6.setFont(font1);
         self.tableWidget_item_list.setHorizontalHeaderItem(6, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        __qtablewidgetitem7.setTextAlignment(Qt.AlignCenter);
+        __qtablewidgetitem7.setFont(font1);
+        self.tableWidget_item_list.setHorizontalHeaderItem(7, __qtablewidgetitem7)
         if (self.tableWidget_item_list.rowCount() < 1):
             self.tableWidget_item_list.setRowCount(1)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        __qtablewidgetitem8.setTextAlignment(Qt.AlignCenter);
+        self.tableWidget_item_list.setItem(0, 0, __qtablewidgetitem8)
         self.tableWidget_item_list.setObjectName(u"tableWidget_item_list")
-        self.tableWidget_item_list.setGeometry(QRect(10, 90, 771, 650))
-        self.tableWidget_item_list.setMinimumSize(QSize(560, 650))
+        self.tableWidget_item_list.setGeometry(QRect(10, 90, 831, 651))
+        self.tableWidget_item_list.setMinimumSize(QSize(831, 651))
+        self.tableWidget_item_list.setMaximumSize(QSize(831, 651))
+        self.tableWidget_item_list.setIconSize(QSize(64, 64))
         self.tableWidget_item_list.setShowGrid(True)
         self.tableWidget_item_list.setGridStyle(Qt.SolidLine)
         self.tableWidget_item_list.setSortingEnabled(False)
@@ -109,13 +118,9 @@ class Ui_EFTPQ_UI(object):
         self.tableWidget_item_list.verticalHeader().setHighlightSections(True)
         self.tableWidget_item_list.verticalHeader().setProperty("showSortIndicator", False)
         self.tableWidget_item_list.verticalHeader().setStretchLastSection(False)
-
-        self.tableWidget_item_list.setColumnWidth(0, 70)
-        self.tableWidget_item_list.setColumnWidth(1, 180)
-
         self.pushButton_search = QPushButton(EFTPQ_UI)
         self.pushButton_search.setObjectName(u"pushButton_search")
-        self.pushButton_search.setGeometry(QRect(570, 50, 60, 30))
+        self.pushButton_search.setGeometry(QRect(500, 50, 121, 30))
         self.comboBox_lang = QComboBox(EFTPQ_UI)
         self.comboBox_lang.addItem("")
         self.comboBox_lang.addItem("")
@@ -127,7 +132,7 @@ class Ui_EFTPQ_UI(object):
         self.comboBox_lang.addItem("")
         self.comboBox_lang.addItem("")
         self.comboBox_lang.setObjectName(u"comboBox_lang")
-        self.comboBox_lang.setGeometry(QRect(500, 50, 60, 30))
+        self.comboBox_lang.setGeometry(QRect(500, 10, 121, 30))
         self.comboBox_lang.setEditable(True)
         self.comboBox_lang.setFrame(True)
         self.label_tool_version = QLabel(EFTPQ_UI)
@@ -138,10 +143,10 @@ class Ui_EFTPQ_UI(object):
         self.label_server_version.setGeometry(QRect(92, 770, 85, 15))
         self.label_tool_version_x = QLabel(EFTPQ_UI)
         self.label_tool_version_x.setObjectName(u"label_tool_version_x")
-        self.label_tool_version_x.setGeometry(QRect(164, 750, 280, 15))
+        self.label_tool_version_x.setGeometry(QRect(164, 750, 411, 16))
         self.label_server_version_x = QLabel(EFTPQ_UI)
         self.label_server_version_x.setObjectName(u"label_server_version_x")
-        self.label_server_version_x.setGeometry(QRect(180, 770, 280, 15))
+        self.label_server_version_x.setGeometry(QRect(180, 770, 391, 16))
         self.pushButton_github_logo = QPushButton(EFTPQ_UI)
         self.pushButton_github_logo.setObjectName(u"pushButton_github_logo")
         self.pushButton_github_logo.setGeometry(QRect(12, 752, 30, 30))
@@ -162,7 +167,7 @@ class Ui_EFTPQ_UI(object):
         self.pushButton_bilibili_logo.setIconSize(QSize(28, 28))
         self.pushButton_toTarkovMarket = QPushButton(EFTPQ_UI)
         self.pushButton_toTarkovMarket.setObjectName(u"pushButton_toTarkovMarket")
-        self.pushButton_toTarkovMarket.setGeometry(QRect(522, 753, 260, 32))
+        self.pushButton_toTarkovMarket.setGeometry(QRect(580, 750, 260, 32))
         self.pushButton_toTarkovMarket.setCursor(QCursor(Qt.PointingHandCursor))
         self.pushButton_toTarkovMarket.setStyleSheet(u"color: rgb(255, 0, 0);\n"
 "font: 25 12pt \"Segoe UI Light\";")
@@ -181,11 +186,19 @@ class Ui_EFTPQ_UI(object):
         self.pushButton_bilibili_logo.raise_()
         self.pushButton_toTarkovMarket.raise_()
 
+        # 自定义
+        self.tableWidget_item_list.setColumnWidth(0, 70)
+        self.tableWidget_item_list.setColumnWidth(1, 150)
+        self.tableWidget_item_list.setColumnWidth(2, 120)
+        self.tableWidget_item_list.setColumnWidth(3, 120)
+        self.tableWidget_item_list.setColumnWidth(4, 120)
+        self.tableWidget_item_list.setColumnWidth(5, 120)
+        self.tableWidget_item_list.setColumnWidth(6, 120)
+        self.tableWidget_item_list.setColumnWidth(7, 250)
         self.retranslateUi(EFTPQ_UI)
 
         QMetaObject.connectSlotsByName(EFTPQ_UI)
     # setupUi
-
     def retranslateUi(self, EFTPQ_UI):
         EFTPQ_UI.setWindowTitle(QCoreApplication.translate("EFTPQ_UI", u"\u9003\u79bb\u5854\u79d1\u592b\u5728\u7ebf\u8be2\u4ef7 - Made by JOZA", None))
         self.label_server_url.setText(QCoreApplication.translate("EFTPQ_UI", u"\u670d\u52a1\uff1a", None))
@@ -197,15 +210,22 @@ class Ui_EFTPQ_UI(object):
         ___qtablewidgetitem1 = self.tableWidget_item_list.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("EFTPQ_UI", u"\u540d\u79f0", None));
         ___qtablewidgetitem2 = self.tableWidget_item_list.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("EFTPQ_UI", u"\u5f53\u524d\u4ef7\u683c", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("EFTPQ_UI", u"\u8df3\u86a4\u4ef7\u683c", None));
         ___qtablewidgetitem3 = self.tableWidget_item_list.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("EFTPQ_UI", u"\u57fa\u7840\u4ef7\u683c", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("EFTPQ_UI", u"\u5546\u4eba\u4ef7\u683c", None));
         ___qtablewidgetitem4 = self.tableWidget_item_list.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("EFTPQ_UI", u"24h\u5747\u4ef7", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("EFTPQ_UI", u"\u57fa\u7840\u4ef7\u683c", None));
         ___qtablewidgetitem5 = self.tableWidget_item_list.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("EFTPQ_UI", u"7d\u5747\u4ef7", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("EFTPQ_UI", u"24h\u5747\u4ef7", None));
         ___qtablewidgetitem6 = self.tableWidget_item_list.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("EFTPQ_UI", u"\u66f4\u65b0\u65f6\u95f4", None));
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("EFTPQ_UI", u"7d\u5747\u4ef7", None));
+        ___qtablewidgetitem7 = self.tableWidget_item_list.horizontalHeaderItem(7)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("EFTPQ_UI", u"\u66f4\u65b0\u65f6\u95f4", None));
+
+        __sortingEnabled = self.tableWidget_item_list.isSortingEnabled()
+        self.tableWidget_item_list.setSortingEnabled(False)
+        self.tableWidget_item_list.setSortingEnabled(__sortingEnabled)
+
         self.pushButton_search.setText(QCoreApplication.translate("EFTPQ_UI", u"\u641c\u7d22", None))
         self.comboBox_lang.setItemText(0, QCoreApplication.translate("EFTPQ_UI", u"cn", None))
         self.comboBox_lang.setItemText(1, QCoreApplication.translate("EFTPQ_UI", u"en", None))

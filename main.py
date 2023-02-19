@@ -11,8 +11,8 @@ from function.UnimportantFunction import *
 from threading import  Thread
 from time import sleep
 
-VERSION = "[client]0.1.3"
-BASEURL = ""
+VERSION = "[client]0.1.4"
+BASEURL = "http://server.eft.joza.fun"
 
 class AppUI(QMainWindow):
     def __init__(self):
@@ -131,41 +131,103 @@ class AppUI(QMainWindow):
         for i in range(LEN):
             print(i)
             self.ui.tableWidget_item_list.insertRow(i)
-            # ----------------------------------------------
-            thread_geticon = Thread(target=self.getICON,
-                            args=(jsondata[i]['icon'],i)
-                            )
-            thread_geticon.start()
-            # ----------------------------------------------
-            item = QTableWidgetItem(jsondata[i]['name'])
+
+            bannedOnFlea:bool = jsondata[i]['bannedOnFlea']
+            haveMarketData:bool = jsondata[i]['haveMarketData']
+            slots:int = jsondata[i]['slots']
+
+            # 图标----------------------------------------------
+            if(jsondata[i]['icon'] != ""):
+                print(jsondata[i]['icon'])
+                thread_geticon = Thread(target=self.getICON,
+                                args=(jsondata[i]['icon'],i)
+                                )
+                thread_geticon.start()
+            else:
+                item = QTableWidgetItem("Ø")
+                item.setFlags(Qt.ItemIsEnabled)
+                item.setTextAlignment(Qt.AlignCenter)
+                self.ui.tableWidget_item_list.setItem(i, 0, item)
+            # 物品名称----------------------------------------------
+            item = QTableWidgetItem(jsondata[i]['name'] + " ["+ str(slots) +"]")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 1, item)
-            # ----------------------------------------------
-            item = QTableWidgetItem(str(jsondata[i]['price']))
+            # 物品价格(跳蚤)----------------------------------------------
+            if(bannedOnFlea):
+                item = QTableWidgetItem("跳蚤禁售")
+            elif(not haveMarketData):
+                item = QTableWidgetItem("没有报价")
+            else:
+                p = jsondata[i]['price']
+                if (slots == 1):
+                    item = QTableWidgetItem(str(p))
+                else:
+                    item = QTableWidgetItem(str(p) + "\n(单格" + str(p / slots) + ")")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 2, item)
-            # ----------------------------------------------
-            item = QTableWidgetItem(str(jsondata[i]['basePrice']))
+            # 商人价格----------------------------------------------
+            p = jsondata[i]['traderPrice']
+            pRUB = jsondata[i]['traderPriceRub']
+            traderPriceCur = jsondata[i]['traderPriceCur']
+            notEqual:bool = p != pRUB
+            if (slots == 1):
+                if(notEqual):
+                    item = QTableWidgetItem(jsondata[i]['traderName']+ "\n" + str(p) + traderPriceCur + "\nRUB:"+pRUB+"₽")
+                else:
+                    item = QTableWidgetItem(jsondata[i]['traderName']+ "\n" + str(p) + traderPriceCur)
+            else:
+                if (notEqual):
+                    item = QTableWidgetItem(jsondata[i]['traderName']+ "\n" + str(p) + traderPriceCur + "\n(单格" + str(p / slots) + traderPriceCur + ")" + "\nRUB:"+pRUB+"₽")
+                else:
+                    item = QTableWidgetItem(jsondata[i]['traderName']+ "\n" + str(p) + traderPriceCur + "\n(单格" + str(p / slots) + traderPriceCur + ")")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 3, item)
-            # ----------------------------------------------
-            item = QTableWidgetItem(str(jsondata[i]['avg24hPrice']))
+            # 基础价格----------------------------------------------
+            p = jsondata[i]['basePrice']
+            if (slots == 1):
+                item = QTableWidgetItem(str(p))
+            else:
+                item = QTableWidgetItem(str(p) + "\n(单格" + str(p / slots) + ")")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 4, item)
-            # ----------------------------------------------
-            item = QTableWidgetItem(str(jsondata[i]['avg7daysPrice']))
+            # 24h均价----------------------------------------------
+            if (bannedOnFlea):
+                item = QTableWidgetItem("跳蚤禁售")
+            elif (not haveMarketData):
+                item = QTableWidgetItem("没有报价")
+            else:
+                p = jsondata[i]['avg24hPrice']
+                if (slots == 1):
+                    item = QTableWidgetItem(str(p))
+                else:
+                    item = QTableWidgetItem(str(p) + "\n(单格" + str(p / slots) + ")")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 5, item)
-            # ----------------------------------------------
-            item = QTableWidgetItem(jsondata[i]['updated'])
+            # 7d均价----------------------------------------------
+            if (bannedOnFlea):
+                item = QTableWidgetItem("跳蚤禁售")
+            elif (not haveMarketData):
+                item = QTableWidgetItem("没有报价")
+            else:
+                p = jsondata[i]['avg7daysPrice']
+                if (slots == 1):
+                    item = QTableWidgetItem(str(p))
+                else:
+                    item = QTableWidgetItem(str(p) + "\n(单格:" + str(p / slots) + ")")
             item.setFlags(Qt.ItemIsEnabled)
             item.setTextAlignment(Qt.AlignCenter)
             self.ui.tableWidget_item_list.setItem(i, 6, item)
+            # 更新时间----------------------------------------------
+            item = QTableWidgetItem(jsondata[i]['updated'])
+            item.setFlags(Qt.ItemIsEnabled)
+            item.setTextAlignment(Qt.AlignCenter)
+            self.ui.tableWidget_item_list.setItem(i, 7, item)
+            # ----------------------------------------------
         thread1 = Thread(target=self.buttonLock,
                         args=()
                         )
